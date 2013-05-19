@@ -74,8 +74,16 @@ when "ubuntu", "debian"
   package "pkg-config"
 end
 
+profile_dir = value_for_platform(
+  "smartos" => {
+    "default" => "/etc/skel"
+  },
+  "default" => "/etc/profile.d"
+)
+
 group node[:rbenv][:group] do
   members node[:rbenv][:group_users] if node[:rbenv][:group_users]
+  append true
 end
 
 user node[:rbenv][:user] do
@@ -93,7 +101,6 @@ directory node[:rbenv][:root] do
 end
 
 with_home_for_user(node[:rbenv][:user]) do
-
   git node[:rbenv][:root] do
     repository node[:rbenv][:git_repository]
     reference node[:rbenv][:git_revision]
@@ -101,12 +108,11 @@ with_home_for_user(node[:rbenv][:user]) do
     group node[:rbenv][:group]
     action :sync
 
-    notifies :create, "template[/etc/profile.d/rbenv.sh]", :immediately
+    notifies :create, "template[#{profile_dir}/rbenv.sh]", :immediately
   end
-
 end
 
-template "/etc/profile.d/rbenv.sh" do
+template "#{profile_dir}/rbenv.sh" do
   source "rbenv.sh.erb"
   mode "0644"
   variables(
