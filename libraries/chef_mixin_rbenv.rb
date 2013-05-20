@@ -129,6 +129,17 @@ class Chef
           end
         end
       end
+
+      def environment_for_platform
+        value_for_platform(
+          "smartos" => {
+            "default" => {
+              "CONFIGURE_OPTS" => "--with-opt-dir=/opt/local",
+              "LDFLAGS" => "-R/opt/local -L/opt/local/lib"
+            }
+          },
+          "default" => {})
+      end
     end
   end
 end

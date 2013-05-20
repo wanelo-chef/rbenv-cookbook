@@ -29,7 +29,7 @@ action :install do
 
     start_time = Time.now
 
-    out = rbenv_command("install #{new_resource.name}")
+    out = rbenv_command("install #{new_resource.name}", environment_for_platform)
 
     unless out.exitstatus == 0
       raise Chef::Exceptions::ShellCommandFailed, "\n" + out.format_for_exception
