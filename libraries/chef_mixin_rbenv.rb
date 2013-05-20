@@ -40,7 +40,8 @@ class Chef
           :group => node[:rbenv][:group],
           :cwd => rbenv_root_path,
           :env => {
-            'RBENV_ROOT' => rbenv_root_path
+            'RBENV_ROOT' => rbenv_root_path,
+            'PATH' => "#{node[:rbenv][:root]}/bin:#{node[:ruby_build][:bin_path]}:#{ENV['PATH']}"
           },
           :timeout => 3600
         }
