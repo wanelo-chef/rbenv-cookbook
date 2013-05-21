@@ -134,7 +134,7 @@ class Chef
         value_for_platform(
           "smartos" => {
             "default" => {
-              "CONFIGURE_OPTS" => "--with-opt-dir=/opt/local",
+              "CONFIGURE_OPTS" => "--with-opt-dir=/opt/local --enable-shared",
               "LDFLAGS" => "-R/opt/local -L/opt/local/lib"
             }
           },
