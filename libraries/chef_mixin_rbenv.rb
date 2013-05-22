@@ -135,7 +135,9 @@ class Chef
           "smartos" => {
             "default" => {
               "CONFIGURE_OPTS" => "--with-opt-dir=/opt/local --enable-shared",
-              "LDFLAGS" => "-R/opt/local -L/opt/local/lib"
+              "LDFLAGS" => "-R/opt/local -L/opt/local/lib",
+              "CXXFLAGS" => "-m64 -O3 -g -Wall",
+              "CFLAGS" => "-O3 -I/opt/local/include"
             }
           },
           "default" => {})
