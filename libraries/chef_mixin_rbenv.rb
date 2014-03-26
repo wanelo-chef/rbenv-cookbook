@@ -40,8 +40,7 @@ class Chef
           :group => node[:rbenv][:group],
           :cwd => rbenv_root_path,
           :env => {
-            'RBENV_ROOT' => rbenv_root_path,
-            'PATH' => "#{node[:rbenv][:root]}/bin:#{node[:ruby_build][:bin_path]}:#{ENV['PATH']}"
+            'RBENV_ROOT' => rbenv_root_path
           },
           :timeout => 3600
         }
@@ -137,7 +136,8 @@ class Chef
               "CONFIGURE_OPTS" => "--with-opt-dir=/opt/local --enable-shared",
               "LDFLAGS" => "-R/opt/local -L/opt/local/lib",
               "CXXFLAGS" => "-m64 -O3 -g -Wall",
-              "CFLAGS" => "-O3 -I/opt/local/include"
+              "CFLAGS" => "-O3 -I/opt/local/include",
+              "PATH" => "#{node[:rbenv][:root]}/bin:#{node[:ruby_build][:bin_path]}:#{ENV['PATH']}"
             }
           },
           "default" => {})
