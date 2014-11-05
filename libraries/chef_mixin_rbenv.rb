@@ -133,7 +133,7 @@ class Chef
         value_for_platform(
           "smartos" => {
             "default" => {
-              "CONFIGURE_OPTS" => "--with-opt-dir=/opt/local --with-readline-dir=/opt/local/lib/libreadline.so --enable-shared",
+              "CONFIGURE_OPTS" => "--with-opt-dir=/opt/local --with-readline-dir=/opt/local/lib --enable-shared",
               "LDFLAGS" => "-R/opt/local -L/opt/local/lib",
               "CXXFLAGS" => "-m64 -O3 -g -Wall",
               "CFLAGS" => "-O3 -I/opt/local/include",
